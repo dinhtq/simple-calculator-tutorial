@@ -9,8 +9,29 @@ html, body {
 }
 
 #calculator-container {
-  background-color: aquamarine;
-  min-width: 100px;
-  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  color: white;
 }
 
+#calculator-container .row {
+  display: flex;
+  height: 100px;
+}
+
+#calculator-container .row.display {
+  justify-content: flex-end;
+  font-size: 3em;
+  line-height: 2.9;
+  padding-right: 10px;
+  border: 1px solid black;
+}
+
+#calculator-container .row .btn {
+  padding: 10px;
+  width: 100px;
+  line-height: 3;
+  text-align: center;
+  font-size: 1.7em;
+  border: 1px solid black;
+}
