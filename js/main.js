@@ -11,6 +11,7 @@ var operationSymbolMap = {
 }
 
 var curOperation, curNumber1, curNumber2
+var activeOperationBtnEle
 
 function compute(num1, num2, op) {
   var n1 = Number(num1)
@@ -62,7 +63,7 @@ function doOperation(operation) {
   }
 
   // make operation button active
-  var activeOperationBtnEle = document.querySelector(`#${operationSymbolMap[curOperation]}`)
+  activeOperationBtnEle = document.querySelector(`#${operationSymbolMap[curOperation]}`)
   activeOperationBtnEle.classList.add('active')
 }
 
@@ -82,6 +83,7 @@ function doEqual() {
   if (curNumber1 && curNumber2 && curOperation) {
     var result = compute(curNumber1, curNumber2, curOperation)
     resultEle.innerHTML = result
+    activeOperationBtnEle.classList.remove('active')
   }
 }
 
