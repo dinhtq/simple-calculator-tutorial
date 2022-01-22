@@ -67,8 +67,22 @@ function doOperation(operation) {
   activeOperationBtnEle.classList.add('active')
 }
 
-function reset() {
-  console.log('reset')
+function reset(lastComputedNum) {
+  if (activeOperationBtnEle) {
+    activeOperationBtnEle.classList.remove('active')
+    activeOperationBtnEle = null
+  }
+
+  if (lastComputedNum) {
+    // equal button clicked
+    curNumber1 = lastComputedNum
+  } else {
+    // reset button clicked
+    curNumber1 = null
+    resultEle.innerHTML = '0'
+  }
+  curNumber2 = null
+  curOperation = null
 }
 
 function makePosNeg() {
@@ -83,7 +97,7 @@ function doEqual() {
   if (curNumber1 && curNumber2 && curOperation) {
     var result = compute(curNumber1, curNumber2, curOperation)
     resultEle.innerHTML = result
-    activeOperationBtnEle.classList.remove('active')
+    reset(result)
   }
 }
 
