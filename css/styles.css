@@ -41,6 +41,14 @@ html, body {
   flex-grow: 1;
 }
 
+#calculator-container .row .btn:hover {
+  cursor: pointer;
+}
+
+#calculator-container .row .btn.active {
+  background-color: #b36b00;
+}
+
 #calculator-container .btn.misc {
   background-color: #616161;
 }

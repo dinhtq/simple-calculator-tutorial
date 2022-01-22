@@ -3,6 +3,13 @@ calcContainerEle.addEventListener('click', e => onButtonClick(e))
 
 var resultEle = document.querySelector('#result')
 
+var operationSymbolMap = {
+  '/': 'divide',
+  '+': 'add',
+  '-': 'minus',
+  'x': 'multiply'
+}
+
 var curOperation, curNumber1, curNumber2
 
 function compute(num1, num2, op) {
@@ -35,6 +42,8 @@ function doNumber(num) {
 }
 
 function doOperation(operation) {
+  var prevOperation = curOperation
+
   // if curNumber2 is active, then must be a continous operation (1 + 4 - 3),
   // so perform curOperation on num1 and num2 and assign result to num1
   if (curNumber2) {
@@ -45,6 +54,16 @@ function doOperation(operation) {
   }
 
   curOperation = operation
+
+  // make prev selected operation unactive (if necessary)
+  if (prevOperation) {
+    var prevBtnEle = document.querySelector(`#${operationSymbolMap[prevOperation]}`)
+    prevBtnEle.classList.remove('active')
+  }
+
+  // make operation button active
+  var activeOperationBtnEle = document.querySelector(`#${operationSymbolMap[curOperation]}`)
+  activeOperationBtnEle.classList.add('active')
 }
 
 function reset() {
@@ -66,7 +85,20 @@ function doEqual() {
   }
 }
 
+function flashElement(ele) {
+  // flash white on button clicked
+  var prevColor = ele.style.backgroundColor
+  ele.style.backgroundColor = 'white'
+  ele.style.opacity = 0.5
+  setTimeout(function() {
+    ele.style.backgroundColor = prevColor
+    ele.style.opacity = 1
+  }, 100)
+}
+
 function onButtonClick(e) {
+  flashElement(e.target)
+
   var btnClickedValue = e.target.innerHTML
 
   if (Number.isInteger(parseInt(btnClickedValue))) {
